@@ -56,3 +56,16 @@ meson build -Dgbm=enabled -Dopengl=true -Degl=enabled -Degl-native-platform=x11 
 ninja -C build install
 
 rm -rf ~/mesa-25.0.1 ~/mesa-25.0.1.tar.xz ~/termux-packages 
+
+# proot-ubuntu 실행 스크립트 수정
+cat <<'EOF' > $PREFIX/bin/ubuntu
+#!/data/data/com.termux/files/usr/bin/bash
+
+proot-distro login ubuntu $@ --shared-tmp --no-sysvipc --bind /data/data/com.termux/files/home:/mnt/termux-home -- /bin/bash -c "
+export DISPLAY=$DISPLAY
+export MESA_LOADER_DRIVER_OVERRIDE=zink
+export TU_DEBUG=noconform
+export PULSE_RUNTIME_PATH=/data/data/com.termux/files/usr/tmp
+bash
+"
+EOF
