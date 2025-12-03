@@ -20,7 +20,7 @@ patch -p1 < ~/termux-packages/packages/mesa/0007-use-mtx_t-operations-in-turnip.
 patch -p1 < ~/termux-packages/packages/mesa/0008-workaround-fortify-check.patch
 patch -p1 < ~/termux-packages/packages/mesa/0009-disable-resource_create_front-for-vtest.patch
 patch -p1 < ~/termux-packages/packages/mesa/0010-fix-zink-on-egl.patch
-patch -p1 < ~/termux-packages/packages/mesa/0011-lld-undefined-version.patch
+#patch -p1 < ~/termux-packages/packages/mesa/0011-lld-undefined-version.patch
 patch -p1 < ~/termux-packages/packages/mesa/0012-zink-import-fd.patch
 patch -p1 < ~/termux-packages/packages/mesa/0013-fix-zink-on-wayland.patch
 

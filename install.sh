@@ -181,35 +181,30 @@ chmod +x $PREFIX/share/applications/kill_termux_x11.desktop
 # proot ubuntu 설치 및 구성
 proot-distro install ubuntu
 
-pdu() {
-    proot-distro login ubuntu --shared-tmp  -- "$@"
-}
+proot-distro login ubuntu --shared-tmp -- /bin/bash -c "
+apt update && apt upgrade -y
 
-pdu apt update && apt upgrade -y
+apt install sudo wget curl vim nano zip unzip git htop mc firefox mesa-utils glmark2-x11 -y
 
-pdu apt install sudo wget curl vim nano zip unzip git htop mc firefox mesa-utils glmark2-x11 -y
+echo "root 비번 설정"
+passwd
 
-pdu echo "root 비번 설정"
-pdu passwd
+echo "seoksee 유저 생성"
+adduser seoksee
+usermod -aG sudo seoksee
 
-pdu echo "seoksee 유저 생성"
-pdu adduser seoksee
+echo "한국어 설정"
+apt install language-pack-ko -y
 
-pdu usermod -aG sudo seoksee
-
-pdu echo "한국어 설정"
-pdu apt install language-pack-ko
-
-pdu echo 'LANG="ko_KR.UTF-8"
+echo 'LANG="ko_KR.UTF-8"
 LANG="ko_KR.EUC-KR"
 LANGUAGE="ko_KR:ko:en_GB:en"' >> /etc/environment
-
-pdu echo '
+echo '
 export LANG=ko_KR.UTF-8' >> /etc/profile
+source /etc/profile
 
-pdu source /etc/profile
-
-pdu apt install fonts-nanum* -y 
+apt install fonts-nanum* -y 
+"
 
 echo '
 수동으로 해줘야하는 것들:
