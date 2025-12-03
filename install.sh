@@ -187,7 +187,7 @@ pdu() {
 
 pdu apt update && apt upgrade -y
 
-pdu apt install sudo wget curl vim nano zip unzip git htop mc firefox mesa-utils glmark2 -y
+pdu apt install sudo wget curl vim nano zip unzip git htop mc firefox mesa-utils glmark2-x11 -y
 
 pdu echo "root 비번 설정"
 pdu passwd
