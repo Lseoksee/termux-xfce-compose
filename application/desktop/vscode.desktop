@@ -1,0 +1,20 @@
+[Desktop Entry]
+Name=Visual Studio Code
+Comment=Code Editing. Redefined.
+GenericName=Text Editor
+Exec=/data/data/com.termux/files/usr/share/applications/scripts/vscode.sh
+Icon=com.visualstudio.code
+Type=Application
+StartupNotify=true
+StartupWMClass=Code
+Categories=TextEditor;Development;IDE;
+MimeType=text/plain;inode/directory;
+Actions=new-empty-window;
+Keywords=vscode;
+Path=
+Terminal=false
+
+[Desktop Action new-empty-window]
+Name=New Empty Window
+Exec=/data/data/com.termux/files/usr/share/applications/scripts/vscode.sh --new-window %F
+Icon=com.visualstudio.code
