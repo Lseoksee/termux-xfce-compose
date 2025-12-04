@@ -83,7 +83,6 @@ sed -i 's/# bell-character = ignore/bell-character = ignore/g' /data/data/com.te
 # xfce 시작 스크립트
 cat <<'EOF' > $PREFIX/bin/start-xfce
 #!/data/data/com.termux/files/usr/bin/bash
-source ~/.bashrc
 
 killall -9 termux-x11 Xwayland pulseaudio
 termux-wake-lock
