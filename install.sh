@@ -180,11 +180,17 @@ apt update && apt upgrade -y
 
 apt install sudo wget curl vim nano zip unzip git htop mc firefox mesa-utils glmark2-x11 -y
 
+passwd
+
+adduser seoksee
+usermod -aG sudo seoksee
+
 apt install language-pack-ko -y
 
 echo 'LANG="ko_KR.UTF-8"
 LANG="ko_KR.EUC-KR"
 LANGUAGE="ko_KR:ko:en_GB:en"' >> /etc/environment
+
 echo '
 export LANG=ko_KR.UTF-8' >> /etc/profile
 source /etc/profile
@@ -205,4 +211,4 @@ echo '
 수동으로 해줘야하는 것들:
 1. source $PREFIX/etc/bash.bashrc
 2. proot-ubuntu seoksee 계정 visudo 설정
-3. proot-ubuntu 내 /etc/environment 값에 PATH에  /data/data 가 포함되있는 경우 제거'
+3. proot-ubuntu 내 /etc/environment 값에 PATH에 /data/data 가 포함되있는 경우 제거'
