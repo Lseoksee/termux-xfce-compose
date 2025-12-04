@@ -4,7 +4,7 @@ Termux xfce 환경 구성 스크립트
 
 - 시작
     ```bash
-    wget -O https://raw.githubusercontent.com/Lseoksee/termux-xfce-compose/refs/heads/master/install.sh | bash
+    wget -O- https://raw.githubusercontent.com/Lseoksee/termux-xfce-compose/refs/heads/master/install.sh | bash
     ```
 
 - proot-ubuntu 하드웨어 가속 설치
@@ -12,7 +12,7 @@ Termux xfce 환경 구성 스크립트
     > proot-ubuntu 내부에서 실행
 
     ```bash
-    wget -O https://raw.githubusercontent.com/Lseoksee/termux-xfce-compose/refs/heads/master/install-mesa-freedreno.sh | bash
+    wget -O- https://raw.githubusercontent.com/Lseoksee/termux-xfce-compose/refs/heads/master/install-mesa-freedreno.sh | bash
     ```
 
 ## 구성
