@@ -55,19 +55,6 @@ glslang-tools \
 llvm-dev \
 -y
 
-meson build -Dgbm=enabled -Dopengl=true -Degl=enabled -Degl-native-platform=x11 -Dgles1=disabled -Dgles2=enabled -Dglx=dri -Dllvm=enabled -Dshared-llvm=enabled -Dplatforms=x11,wayland -Dgallium-drivers=swrast,virgl,zink -Dosmesa=true -Dglvnd=enabled -Dxmlconfig=disabled -Dvulkan-drivers=swrast -Dfreedreno-kmds=msm,kgsl --reconfigure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu && \
+meson build -Dgbm=enabled -Dopengl=true -Degl=enabled -Degl-native-platform=x11 -Dgles1=disabled -Dgles2=enabled -Dglx=dri -Dllvm=enabled -Dshared-llvm=enabled -Dplatforms=x11 -Dgallium-drivers=swrast,virgl,zink,freedreno -Dosmesa=true -Dglvnd=enabled -Dxmlconfig=disabled -Dvulkan-drivers=swrast,freedreno -Dfreedreno-kmds=msm,kgsl --reconfigure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu && \
 ninja -C build install && \
-rm -rf ~/mesa-25.0.1 ~/mesa-25.0.1.tar.xz ~/termux-packages 
-
-# proot-ubuntu 실행 스크립트 수정
-cat <<'EOF' > $PREFIX/bin/ubuntu
-#!/data/data/com.termux/files/usr/bin/bash
-
-proot-distro login ubuntu $@ --shared-tmp --bind /data/data/com.termux/files/home:/mnt/termux-home -- /bin/bash -c "
-export DISPLAY=$DISPLAY
-export MESA_LOADER_DRIVER_OVERRIDE=zink
-export TU_DEBUG=noconform
-export PULSE_RUNTIME_PATH=/data/data/com.termux/files/usr/tmp
-bash
-"
-EOF
+rm -rf ~/mesa-25.0.1 ~/mesa-25.0.1.tar.xz ~/termux-packages
