@@ -55,7 +55,7 @@ glslang-tools \
 llvm-dev \
 -y
 
-meson build -Dgbm=enabled -Dopengl=true -Degl=enabled -Degl-native-platform=x11 -Dgles1=disabled -Dgles2=enabled -Dglx=dri -Dllvm=enabled -Dshared-llvm=enabled -Dplatforms=x11,wayland -Dgallium-drivers=swrast,virgl,zink,freedreno -Dosmesa=true -Dglvnd=enabled -Dxmlconfig=disabled -Dvulkan-drivers=swrast,freedreno -Dfreedreno-kmds=msm,kgsl --reconfigure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu
+meson build -Dgbm=enabled -Dopengl=true -Degl=enabled -Degl-native-platform=x11 -Dgles1=disabled -Dgles2=enabled -Dglx=dri -Dllvm=enabled -Dshared-llvm=enabled -Dplatforms=x11,wayland -Dgallium-drivers=swrast,virgl,zink -Dosmesa=true -Dglvnd=enabled -Dxmlconfig=disabled -Dvulkan-drivers=swrast -Dfreedreno-kmds=msm,kgsl --reconfigure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu
 
 ninja -C build install
 
