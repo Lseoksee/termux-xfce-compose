@@ -78,6 +78,12 @@ pkg install mesa-demos glmark2 -y
 # 진동 -> 무음 설정
 sed -i 's/# bell-character = ignore/bell-character = ignore/g' /data/data/com.termux/files/home/.termux/termux.properties
 
+# xfce 환경 설정 다운로드 및 적용
+wget -P ~/ https://github.com/Lseoksee/termux-xfce-compose/raw/refs/heads/master/xfce-config.tar.gz
+tar -zxvf ~/xfce-config.tar.gz
+rm -rf ~/xfce-config.tar.gz
+
+
 # 스크립트 생성
 
 # xfce 시작 스크립트
