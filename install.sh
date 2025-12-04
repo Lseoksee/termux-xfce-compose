@@ -181,7 +181,6 @@ apt update && apt upgrade -y
 
 apt install sudo wget curl vim nano zip unzip git htop mc firefox mesa-utils glmark2-x11 -y
 
-echo "한국어 설정"
 apt install language-pack-ko -y
 
 echo 'LANG="ko_KR.UTF-8"
@@ -197,9 +196,9 @@ apt install fonts-nanum* -y
 # 사용자 앱 등록
 git clone https://github.com/Lseoksee/termux-xfce-compose.git
 chmod +x ./termux-xfce-compose/application/desktop/*
-chmod +x ./termux-xfce-compose/scripts/*
+chmod +x ./termux-xfce-compose/application/scripts/*
 cp ./termux-xfce-compose/application/desktop/* $PREFIX/share/applications/
-cp ./termux-xfce-compose/scripts $PREFIX/share/applications 
+cp -r ./termux-xfce-compose/application/scripts $PREFIX/share/applications 
 rm -rf ./termux-xfce-compose
 
 # 완료 메시지
