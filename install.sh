@@ -195,12 +195,12 @@ apt install fonts-nanum* -y
 "
 
 # 사용자 앱 등록
-git clone ~/https://github.com/Lseoksee/termux-xfce-compose.git
-chmod +x ~/termux-xfce-compose/application/desktop/*
-chmod +x ~/termux-xfce-compose/scripts/*
-cp ~/termux-xfce-compose/application/desktop/* $PREFIX/share/applications/
-cp ~/termux-xfce-compose/scripts $PREFIX/share/applications 
-rm -rf ~/termux-xfce-compose
+git clone https://github.com/Lseoksee/termux-xfce-compose.git
+chmod +x ./termux-xfce-compose/application/desktop/*
+chmod +x ./termux-xfce-compose/scripts/*
+cp ./termux-xfce-compose/application/desktop/* $PREFIX/share/applications/
+cp ./termux-xfce-compose/scripts $PREFIX/share/applications 
+rm -rf ./termux-xfce-compose
 
 # 완료 메시지
 echo '
