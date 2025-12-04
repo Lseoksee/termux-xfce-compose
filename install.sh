@@ -180,11 +180,6 @@ apt update && apt upgrade -y
 
 apt install sudo wget curl vim nano zip unzip git htop mc firefox mesa-utils glmark2-x11 -y
 
-passwd
-
-adduser seoksee
-usermod -aG sudo seoksee
-
 apt install language-pack-ko -y
 
 echo 'LANG="ko_KR.UTF-8"
@@ -196,6 +191,17 @@ export LANG=ko_KR.UTF-8' >> /etc/profile
 source /etc/profile
 
 apt install fonts-nanum* -y 
+"
+
+echo "proot-ubuntu root 비밀번호 지정"
+proot-distro login ubuntu --shared-tmp -- /bin/bash -c "
+passwd
+"
+
+echo "proot-ubuntu 'seoksee' 유저 생성"
+proot-distro login ubuntu --shared-tmp -- /bin/bash -c "
+adduser seoksee
+usermod -aG sudo seoksee
 "
 
 # 사용자 앱 등록
@@ -211,4 +217,3 @@ echo '
 수동으로 해줘야하는 것들:
 1. source $PREFIX/etc/bash.bashrc
 2. proot-ubuntu seoksee 계정 visudo 설정
-3. proot-ubuntu 내 /etc/environment 값에 PATH에 /data/data 가 포함되있는 경우 제거'

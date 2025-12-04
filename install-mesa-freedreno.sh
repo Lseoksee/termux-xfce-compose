@@ -2,6 +2,10 @@
 
 # proot-ubuntu 하드웨어 가속용 mesa(freedreno, turnip)빌드 및 설치 스크립트
 
+# prox-ubuntu에서 PATH는 /data/data/com.termux/files/usr/bin 을 포함하기에
+# 빌드 중간에 termux의 툴체인을 참조하지 않도록 기본 리눅스 경로로 재설정
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+
 cd ~/
 
 git clone https://github.com/xMeM/termux-packages.git -b dev/mesa --single-branch
@@ -61,7 +65,7 @@ rm -rf ~/mesa-25.0.1 ~/mesa-25.0.1.tar.xz ~/termux-packages
 cat <<'EOF' > $PREFIX/bin/ubuntu
 #!/data/data/com.termux/files/usr/bin/bash
 
-proot-distro login ubuntu $@ --shared-tmp --no-sysvipc --bind /data/data/com.termux/files/home:/mnt/termux-home -- /bin/bash -c "
+proot-distro login ubuntu $@ --shared-tmp --bind /data/data/com.termux/files/home:/mnt/termux-home -- /bin/bash -c "
 export DISPLAY=$DISPLAY
 export MESA_LOADER_DRIVER_OVERRIDE=zink
 export TU_DEBUG=noconform
