@@ -70,7 +70,7 @@ wget https://github.com/KIMSEONGHA2223/Termux_edit/raw/main/font.ttf
 mv font.ttf .termux/font.ttf
 
 # 하드웨어 가속
-pkg install mesa virglrenderer-android -y
+pkg install mesa-vulkan-icd-freedreno-dri3 -y
 
 # 그래픽 정보 및 벤치마크 도구 설치
 pkg install mesa-demos glmark2 -y
@@ -97,10 +97,7 @@ sleep 1
 am start --user 0 -n com.termux.x11/com.termux.x11.MainActivity > /dev/null 2>&1
 sleep 1
 
-virgl_test_server_android &
-sleep 1
-
-env DISPLAY=:1.0 GALLIUM_DRIVER=virpipe MESA_GL_VERSION_OVERRIDE=4.0 dbus-launch --exit-with-session xfce4-session & > /dev/null 2>&1
+env DISPLAY=:1.0 MESA_LOADER_DRIVER_OVERRIDE=zink dbus-launch --exit-with-session xfce4-session & > /dev/null 2>&1
 
 # Set audio server
 export PULSE_SERVER=127.0.0.1 > /dev/null 2>&1
@@ -183,13 +180,6 @@ proot-distro login ubuntu --shared-tmp -- /bin/bash -c "
 apt update && apt upgrade -y
 
 apt install sudo wget curl vim nano zip unzip git htop mc firefox mesa-utils glmark2-x11 -y
-
-echo "root 비번 설정"
-passwd
-
-echo "seoksee 유저 생성"
-adduser seoksee
-usermod -aG sudo seoksee
 
 echo "한국어 설정"
 apt install language-pack-ko -y
