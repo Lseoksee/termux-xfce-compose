@@ -144,7 +144,7 @@ chmod +x $PREFIX/bin/shutdown-xfce
 cat <<'EOF' > $PREFIX/bin/ubuntu
 #!/data/data/com.termux/files/usr/bin/bash
 
-proot-distro login ubuntu $@ --shared-tmp --no-sysvipc --bind /data/data/com.termux/files/home:/mnt/termux-home -- /bin/bash -c "
+proot-distro login ubuntu $@ --shared-tmp --bind /data/data/com.termux/files/home:/mnt/termux-home -- /bin/bash -c "
 export DISPLAY=$DISPLAY
 export PULSE_RUNTIME_PATH=/data/data/com.termux/files/usr/tmp
 bash
