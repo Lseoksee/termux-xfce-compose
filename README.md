@@ -25,3 +25,9 @@ Termux 네이티브 Xfce 환경 + proot-ubuntu
 - proot-ubuntu: zink (turnip)
 
 freedreno kgsl 설치를 연구중에 있으나 잘 안되는중
+
+### 주의 
+
+Android 16 이후 Proot-distro 성능이 급격히 저하되는 문제가 있음
+
+https://github.com/termux/proot-distro/issues/567
