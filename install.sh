@@ -199,17 +199,6 @@ source /etc/profile
 apt install fonts-nanum* -y 
 "
 
-echo "proot-ubuntu root 비밀번호 지정"
-proot-distro login ubuntu --shared-tmp -- /bin/bash -c "
-passwd
-"
-
-echo "proot-ubuntu 'seoksee' 유저 생성"
-proot-distro login ubuntu --shared-tmp -- /bin/bash -c "
-adduser seoksee
-usermod -aG sudo seoksee
-"
-
 # 사용자 앱 등록
 git clone https://github.com/Lseoksee/termux-xfce-compose.git
 chmod +x ./termux-xfce-compose/application/desktop/*
@@ -222,4 +211,4 @@ rm -rf ./termux-xfce-compose
 echo '
 수동으로 해줘야하는 것들:
 1. source $PREFIX/etc/bash.bashrc
-2. proot-ubuntu seoksee 계정 visudo 설정
+2. passwd 변경및 사용자 생성
