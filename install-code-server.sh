@@ -26,6 +26,15 @@ apt install sudo wget curl vim nano zip unzip git htop mc -y
 curl -fsSL https://code-server.dev/install.sh | sh
 "
 
+# 환경변수 설정
+echo '
+export PHOME="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu"
+
+alias ls="eza -lF --icons"
+alias ll="ls -alhF"
+alias shutdown="kill -9 -1"
+' >> $PREFIX/etc/bash.bashrc
+
 # code-server 시작 스크립트
 cat <<'EOF' > $PREFIX/bin/start-code
 #!/data/data/com.termux/files/usr/bin/bash
@@ -37,12 +46,13 @@ code-server > code-server.log 2>&1
 EOF
 chmod +x $PREFIX/bin/start-code
 
-# 환경변수 설정
-echo '
-alias ls="eza -lF --icons"
-alias ll="ls -alhF"
-alias shutdown="kill -9 -1"
-' >> $PREFIX/etc/bash.bashrc
+# code-server 로그스크립트
+cat <<'EOF' > $PREFIX/bin/code-log
+#!/data/data/com.termux/files/usr/bin/bash
+tail -f -n 100 $PHOME/home/seoksee/code-log.log
+EOF
+
+
 
 # 완료 메시지
 echo '
