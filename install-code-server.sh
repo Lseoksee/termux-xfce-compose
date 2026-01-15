@@ -51,8 +51,7 @@ cat <<'EOF' > $PREFIX/bin/code-log
 #!/data/data/com.termux/files/usr/bin/bash
 tail -f -n 100 $PHOME/home/seoksee/code-log.log
 EOF
-
-
+chmod +x $PREFIX/bin/code-log
 
 # 완료 메시지
 echo '
