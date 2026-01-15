@@ -14,6 +14,11 @@ Termux xfce 환경 구성 스크립트
     ```bash
     wget -O- https://raw.githubusercontent.com/Lseoksee/termux-xfce-compose/refs/heads/master/install-mesa-freedreno.sh | bash
     ```
+- code-server 설치용
+
+    ```bash
+    wget -O- https://raw.githubusercontent.com/Lseoksee/termux-xfce-compose/refs/heads/master/install-code-server.sh | bash
+    ```
 
 ## 구성
 
