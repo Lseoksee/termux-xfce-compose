@@ -41,7 +41,14 @@ cat <<'EOF' > $PREFIX/bin/start-code
 
 proot-distro login ubuntu --user seoksee --shared-tmp --no-kill-on-exit --bind /data/data/com.termux/files/home:/mnt/termux-home -- /bin/bash -c "
 termux-wake-lock
-code-server > code-server.log 2>&1
+
+echo '' > code-log.log
+
+while true :
+do
+    code-server >> code-log.log 2>&1
+    echo 'code-server 다시시작 중...' >> code-log.log
+done
 " &
 EOF
 chmod +x $PREFIX/bin/start-code
