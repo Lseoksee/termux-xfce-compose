@@ -30,11 +30,40 @@ curl -fsSL https://code-server.dev/install.sh | sh
 echo '
 export PHOME="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu"
 
-alias prun="proot-distro login ubuntu --user seoksee --shared-tmp --isolated --no-sysvipc --bind /data/data/com.termux/files:/mnt/termux-home --bind /storage/emulated/0:/mnt/storage"
 alias ls="eza -lF --icons"
 alias ll="ls -alhF"
 alias shutdown="kill -9 -1"
 ' >> $PREFIX/etc/bash.bashrc
+
+# proot ubuntu 진입 스크립트
+cat <<'EOF' > $PREFIX/bin/ubuntu
+#!/data/data/com.termux/files/usr/bin/bash
+
+proot-distro login ubuntu \
+--user seoksee \
+--shared-tmp \
+--isolated \
+--no-sysvipc \
+--bind /data/data/com.termux/files:/mnt/termux-home \
+--bind /storage/emulated/0:/mnt/storage "$@"
+EOF
+chmod +x $PREFIX/bin/ubuntu
+
+# proot ubuntu 명령어 프록시 스크립트
+cat <<'EOF' > $PREFIX/bin/prun
+#!/data/data/com.termux/files/usr/bin/bash
+
+proot-distro login ubuntu \
+--user seoksee \
+--shared-tmp \
+--isolated \
+--no-sysvipc \
+--bind /data/data/com.termux/files:/mnt/termux-home \
+--bind /storage/emulated/0:/mnt/storage \
+-- /bin/bash -c "$*"
+EOF
+chmod +x $PREFIX/bin/prun
+
 
 # code-server 시작 스크립트
 cat <<'EOF' > $PREFIX/bin/start-code
@@ -44,7 +73,7 @@ termux-wake-lock
 
 pkill -9 -f code-server-session
 
-proot-distro login ubuntu --user seoksee --shared-tmp --isolated --no-sysvipc --no-kill-on-exit --bind /data/data/com.termux/files:/mnt/termux-home --bind /storage/emulated/0:/mnt/storage -- /bin/bash -c "
+ubuntu --no-kill-on-exit -- /bin/bash -c "
 
 echo '' > code-log.log
 
