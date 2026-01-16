@@ -52,7 +52,6 @@ while true :
 do
     setsid bash -c 'exec -a code-server-session code-server' >> code-log.log 2>&1
     echo 'code-server 다시시작 중...' >> code-log.log
-    pkill -9 -f code-server-session
     sleep 3
 done
 " &
