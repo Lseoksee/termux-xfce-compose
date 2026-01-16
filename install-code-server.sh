@@ -30,7 +30,7 @@ curl -fsSL https://code-server.dev/install.sh | sh
 echo '
 export PHOME="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu"
 
-alias prun="proot-distro login ubuntu --user seoksee --shared-tmp --isolated --no-sysvipc"
+alias prun="proot-distro login ubuntu --user seoksee --shared-tmp --isolated --no-sysvipc --bind /data/data/com.termux/files:/mnt/termux-home --bind /storage/emulated/0:/mnt/storage"
 alias ls="eza -lF --icons"
 alias ll="ls -alhF"
 alias shutdown="kill -9 -1"
@@ -44,15 +44,16 @@ termux-wake-lock
 
 pkill -9 -f code-server-session
 
-prun --no-kill-on-exit -- /bin/bash -c "
+proot-distro login ubuntu --user seoksee --shared-tmp --isolated --no-sysvipc --no-kill-on-exit --bind /data/data/com.termux/files:/mnt/termux-home --bind /storage/emulated/0:/mnt/storage -- /bin/bash -c "
 
 echo '' > code-log.log
 
 while true :
 do
-    exec -a code-server-session code-server >> code-log.log 2>&1
-    sleep 1
+    setsid bash -c 'exec -a code-server-session code-server' >> code-log.log 2>&1
     echo 'code-server 다시시작 중...' >> code-log.log
+    pkill -9 -f code-server-session
+    sleep 3
 done
 " &
 EOF
