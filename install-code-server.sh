@@ -71,7 +71,10 @@ cat <<'EOF' > $PREFIX/bin/start-code
 
 termux-wake-lock
 
+pkill -9 -f sshd
 pkill -9 -f code-server-session
+
+sshd
 
 ubuntu --no-kill-on-exit -- /bin/bash -c "
 
