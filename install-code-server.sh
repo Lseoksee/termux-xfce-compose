@@ -30,6 +30,7 @@ curl -fsSL https://code-server.dev/install.sh | sh
 echo '
 export PHOME="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu"
 
+alias prun="proot-distro login ubuntu --user seoksee --shared-tmp --isolated --no-sysvipc"
 alias ls="eza -lF --icons"
 alias ll="ls -alhF"
 alias shutdown="kill -9 -1"
@@ -43,7 +44,7 @@ termux-wake-lock
 
 pkill -9 -f code-server-session
 
-proot-distro login ubuntu --user seoksee --shared-tmp --isolated --no-sysvipc --no-kill-on-exit --bind /data/data/com.termux/files:/mnt/termux-home -- /bin/bash -c "
+prun --no-kill-on-exit -- /bin/bash -c "
 
 echo '' > code-log.log
 
@@ -76,4 +77,4 @@ chmod +x $PREFIX/bin/code-log
 echo '
 수동으로 해줘야하는 것들:
 1. source $PREFIX/etc/bash.bashrc
-2. passwd 변경및 사용자 생성
+2. passwd 변경및 사용자 생성 '
