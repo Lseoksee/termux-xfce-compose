@@ -18,7 +18,7 @@ sed -i 's/# bell-character = ignore/bell-character = ignore/g' /data/data/com.te
 # proot ubuntu 설치 및 구성
 proot-distro install ubuntu
 
-proot-distro login ubuntu --shared-tmp -- /bin/bash -c "
+proot-distro login ubuntu --shared-tmp --isolated --no-sysvipc -- /bin/bash -c "
 apt update && apt upgrade -y
 
 apt install sudo wget curl vim nano zip unzip git htop mc -y
@@ -39,21 +39,33 @@ alias shutdown="kill -9 -1"
 cat <<'EOF' > $PREFIX/bin/start-code
 #!/data/data/com.termux/files/usr/bin/bash
 
-proot-distro login ubuntu --user seoksee --shared-tmp --no-kill-on-exit --bind /data/data/com.termux/files/home:/mnt/termux-home -- /bin/bash -c "
 termux-wake-lock
+
+pkill -9 -f code-server-session
+
+proot-distro login ubuntu --user seoksee --shared-tmp --isolated --no-sysvipc --no-kill-on-exit --bind /data/data/com.termux/files:/mnt/termux-home -- /bin/bash -c "
 
 echo '' > code-log.log
 
 while true :
 do
-    code-server >> code-log.log 2>&1
+    exec -a code-server-session code-server >> code-log.log 2>&1
+    sleep 1
     echo 'code-server 다시시작 중...' >> code-log.log
 done
 " &
 EOF
 chmod +x $PREFIX/bin/start-code
 
-# code-server 로그스크립트
+# code-server 종료 스크립트
+cat <<'EOF' > $PREFIX/bin/stop-code
+#!/data/data/com.termux/files/usr/bin/bash
+
+pkill -9 -f code-server-session
+EOF
+chmod +x $PREFIX/bin/stop-code
+
+# code-server 로그 스크립트
 cat <<'EOF' > $PREFIX/bin/code-log
 #!/data/data/com.termux/files/usr/bin/bash
 tail -f -n 100 $PHOME/home/seoksee/code-log.log
